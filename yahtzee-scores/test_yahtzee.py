@@ -38,7 +38,11 @@ class TestYahtzeeScores(unittest.TestCase):
         new_scorecard = yahtzee.apply_score(scorecard, "sixes", 18)
         self.assertEqual(new_scorecard["sixes"], 18)
         self.assertIsNone(scorecard["sixes"], "apply_score should not mutate the original scorecard")
-
+def test_upper_section(self):
+        roll = yahtzee.parse_roll("35166")
+        scores = yahtzee.generate_scores(roll)
+        self.assertEqual(scores["ones"], 20, f"Expected 20, but got {scores['three_of_a_kind']}")
+        self.assertEqual(scores["full_house"], 0, f"Expected 0, but got {scores['full_house']}")
 
 if __name__ == "__main__":
     unittest.main()
