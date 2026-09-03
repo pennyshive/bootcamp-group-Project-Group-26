@@ -119,4 +119,37 @@ def check_full_house(roll):
         return "Full House!"
     else:
         return "Not a full house"
+def score_small_straight(dice):
+    """Checks for 4 consecutive numbers. Returns 30 if valid, else 0."""
+    # Convert to a sorted list of unique values
+    unique_dice = sorted(list(set(dice)))
+    
+    # Convert to a string to easily check for sub-sequences
+    dice_str = "".join(map(str, unique_dice))
+    
+    # Check if any of the three possible 4-sequence combos exist in our unique dice
+    if "1234" in dice_str or "2345" in dice_str or "3456" in dice_str:
+        return 30
+    return 0
+
+def score_large_straight(dice):
+    """Checks for 5 consecutive numbers. Returns 40 if valid, else 0."""
+    unique_dice = sorted(list(set(dice)))
+    
+    # A large straight requires 5 unique elements
+    if len(unique_dice) == 5:
+        # If it spans exactly 4 steps from min to max, it is consecutive (e.g., 5 - 1 = 4)
+        if unique_dice[-1] - unique_dice[0] == 4:
+            return 40
+    return 0
+
+# --- Quick Test ---
+current_roll = [2, 3, 4, 4, 5]  # Contains 2-3-4-5 (Small Straight)
+
+# Save the scores to your dictionary
+scorecard["Small Straight"] = score_small_straight(current_roll)
+scorecard["Large Straight"] = score_large_straight(current_roll)
+
+print(scorecard)
+# Output: {'Small Straight': 30, 'Large Straight': 0}
 
