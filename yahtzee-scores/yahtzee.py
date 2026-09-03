@@ -1,4 +1,6 @@
 from collections import Counter
+import random
+
 CATEGORIES = [
     "ones",
     "twos",
@@ -76,8 +78,45 @@ def check_kinds(hand):
         return "Three of a Kind!"
     else:
         return "Nothing special."
+        
 def apply_score(scorecard, category, points):
     new_scorecard = dict(scorecard)
     new_scorecard[category] = points
     return new_scorecard
     
+def check_yahtzee(roll):
+    """
+    Checks if all 5 dice are the same.
+    """
+    if len(set(roll)) == 1:
+        return "Yahtzee!"
+    else:
+        return "roll again."
+
+
+def roll_dice():
+    """
+    Simulates rolling 5 dice.
+    """
+    return [random.randint(1, 6) for _ in range(5)]
+
+
+def check_full_house(roll):
+    """
+    Checks if the roll is a full house (3 of one number and 2 of another).
+    """
+    matching_dice = set(roll)
+    
+    # A full house must have exactly two different numbers
+    if len(matching_dice) != 2:
+        return "Not a full house."
+        
+    first_digit = list(matching_dice)[0]
+    count = roll.count(first_digit)
+    
+    # If the first number appears 2 or 3 times, the other must appear 3 or 2 times
+    if count == 2 or count == 3:
+        return "Full House!"
+    else:
+        return "Not a full house"
+
