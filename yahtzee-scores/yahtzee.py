@@ -170,7 +170,7 @@ def score_large_straight(roll):
     unique_roll = sorted(list(set(roll)))
     
     # A large straight requires 5 unique elements
-    if len(unique_roll == 5):
+    if len(unique_roll) == 5:
         # If it spans exactly 4 steps from min to max, it is consecutive (e.g., 5 - 1 = 4)
         if unique_roll[-1] - unique_roll[0] == 4:
             return 40
