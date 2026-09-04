@@ -50,10 +50,8 @@ def generate_scores(roll):
     print(scores)
     return scores
 
-
-def check_kinds(hand):
+def check_three_a_kind(hand):
     # Initialize our tracking variables to False before we start checking
-    found_four = False
     found_three = False
 
     # Go through each item in the hand one by one
@@ -66,19 +64,46 @@ def check_kinds(hand):
                 count += 1
         
         # Check our count after comparing with the whole hand
+        if count == 3:
+            found_three = True
+       
+    # After checking everything, determine the result
+    if found_three:
+        sum = 0 
+        for item in hand:
+            sum = sum + item
+        return sum
+       
+    else:
+        return 0
+    
+
+def check_four_a_kind(hand):
+    # Initialize our tracking variables to False before we start checking
+    found_four = False
+    # Go through each item in the hand one by one
+    for item in hand:
+        # Start counting how many times this specific 'item' appears
+        count = 0
+        # Look at every other item in the hand to compare
+        for compare_item in hand:
+            if item == compare_item:
+                count += 1
+        
+        # Check our count after comparing with the whole hand
         if count == 4:
             found_four = True
-        elif count == 3:
-            found_three = True
-
+       
     # After checking everything, determine the result
     if found_four:
-        return "Four of a Kind!"
-    elif found_three:
-        return "Three of a Kind!"
+        sum = 0 
+        for item in hand:
+            sum = sum + item
+        return sum
     else:
-        return "Nothing special."
-        
+        return 0
+
+
 def apply_score(scorecard, category, points):
     new_scorecard = dict(scorecard)
     new_scorecard[category] = points
