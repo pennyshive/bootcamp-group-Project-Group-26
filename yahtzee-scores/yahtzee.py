@@ -72,7 +72,7 @@ def check_three_a_kind(hand):
                 count += 1
         
         # Check our count after comparing with the whole hand
-        if count == 3:
+        if count >= 3:
             found_three = True
        
     # After checking everything, determine the result
@@ -143,7 +143,7 @@ def check_full_house(roll):
     
     # A full house must have exactly two different numbers
     if len(matching_dice) != 2:
-        return check_four_a_kind(roll)
+        return 0
         
     first_digit = list(matching_dice)[0]
     count = roll.count(first_digit)
