@@ -54,7 +54,8 @@ def generate_scores(roll):
     scores["large_straight"] = score_large_straight(roll)   
     scores["yahtzee"] = check_yahtzee(roll)
     scores["chance"] = total
-    return scores
+
+    print(len(scores))
     return scores
 
 def check_three_a_kind(hand):
@@ -130,7 +131,8 @@ def roll_dice():
     """
     Simulates rolling 5 dice.
     """
-    return [random.randint(1, 6) for _ in range(5)]
+    roll = [random.randint(1, 6) for _ in range(5)]
+    return "".join(str(x) for x in roll)
 
 
 def check_full_house(roll):
@@ -175,13 +177,43 @@ def score_large_straight(roll):
             return 40
     return 0
 
-# # --- Quick Test ---
-# current_roll = [2, 3, 4, 4, 5]  # Contains 2-3-4-5 (Small Straight)
+player_scores= {}
+player_tolal = []
+computer_scores = {}
+computer_tolal = []
+print("Let's play Yahtzee")
+name = input("What is your name ?")
+rolls = []
 
-# # Save the scores to your dictionary
-# scorecard["Small Straight"] = score_small_straight(current_roll)
-# scorecard["Large Straight"] = score_large_straight(current_roll)
-
-# print(scorecard)
-# # Output: {'Small Straight': 30, 'Large Straight': 0}
-
+while len(player_scores)<13 and len(computer_scores)<13:
+    user_choice = ""
+    while user_choice == "" and user_choice == "roll again":
+        roll = roll_dice()
+        print(parse_roll(roll))
+        print("this is your roll " + roll)
+        print("This is your scores :",generate_scores(parse_roll(roll)))
+        user_choice = input(name + " type (as is without the ('') which one you want"+str(CATEGORIES))
+        current_score = generate_scores(parse_roll(roll))
+        print(current_score)
+        if user_choice == 'roll again':
+            if has_run(1):
+                print("this is your roll")
+            roll = roll_dice()
+            print("This is your scores :",generate_scores(parse_roll(roll)))
+        else:
+            player_scores=apply_score(generate_scores(parse_roll(roll)),user_choice,generate_scores[user_choice])
+    print("This is computer's scorecard :" ,player_scores)
+    computer_choice= ""
+    while computer_choice == "":
+        computer_points = 0
+        roll = roll_dice()
+        current_score = generate_scores(parse_roll(roll))
+        print(current_score)
+        current_points =0
+        for key, value in current_score.items():
+                if value > current_points :
+                    computer_choice=key
+                else:
+                    continue
+        computer_scores[computer_choice] = current_score[computer_choice]
+        print("This is computer's scorecard :" ,computer_scores)
