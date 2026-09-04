@@ -48,8 +48,8 @@ def generate_scores(roll):
         face += 1
     
     # Lower section — call each group member's function
-    scores["three_of_a_kind"] = check_kinds(roll)
-    scores["four_of_a_kind"] = check_kinds(roll)
+    scores["three_of_a_kind"] = check_three_a_kind(roll)
+    scores["four_of_a_kind"] = check_four_a_kind(roll)
     scores["full_house"] = check_full_house(roll)
     scores["small_straight"] = score_small_straight(roll)  
     scores["large_straight"] = score_large_straight(roll)   
