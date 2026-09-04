@@ -218,3 +218,4 @@ while len(player_scores)<13 and len(computer_scores)<13:
         computer_scores[computer_choice] = current_score[computer_choice]
         print("This is computer's scorecard :" ,computer_scores)
  # this is the print statement
+    print("---------------THE END----------------")
