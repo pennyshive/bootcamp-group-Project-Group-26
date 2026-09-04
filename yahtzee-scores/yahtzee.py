@@ -38,8 +38,7 @@ def generate_scores(roll):
     counts = Counter(roll)   #counts how many times each dices landed on each number
     total = sum(roll)    #This is the sum of the roll 
     scores = {}
-    print(counts)
-    print(total)
+    
     #The Upper section(ones to sixes)
     face = 1
     names = ["ones", "twos", "threes", "fours", "fives", "sixes"]
@@ -47,7 +46,16 @@ def generate_scores(roll):
         print(face, name)
         scores[name] = sum(d for d in roll if d == face)
         face += 1
-    print(scores)
+    
+    # Lower section — call each group member's function
+    scores["three_of_a_kind"] = check_kinds(roll)
+    scores["four_of_a_kind"] = check_kinds(roll)
+    scores["full_house"] = check_full_house(roll)
+    scores["small_straight"] = score_small_straight(roll)  
+    scores["large_straight"] = score_large_straight(roll)   
+    scores["yahtzee"] = check_yahtzee(roll)
+    scores["chance"] = total
+    return scores
     return scores
 
 def check_three_a_kind(hand):
