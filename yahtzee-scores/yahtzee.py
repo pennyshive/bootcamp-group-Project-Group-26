@@ -43,7 +43,6 @@ def generate_scores(roll):
     face = 1
     names = ["ones", "twos", "threes", "fours", "fives", "sixes"]
     for name in names:
-        print(face, name)
         scores[name] = sum(d for d in roll if d == face)
         face += 1
     
@@ -99,7 +98,7 @@ def check_four_a_kind(hand):
                 count += 1
         
         # Check our count after comparing with the whole hand
-        if count == 4:
+        if count >= 4:
             found_four = True
        
     # After checking everything, determine the result
@@ -122,9 +121,9 @@ def check_yahtzee(roll):
     Checks if all 5 dice are the same.
     """
     if len(set(roll)) == 1:
-        return "Yahtzee!"
+        return 50
     else:
-        return "roll again."
+        return 0
 
 
 def roll_dice():
@@ -142,16 +141,16 @@ def check_full_house(roll):
     
     # A full house must have exactly two different numbers
     if len(matching_dice) != 2:
-        return "Not a full house."
+        return check_four_a_kind(roll)
         
     first_digit = list(matching_dice)[0]
     count = roll.count(first_digit)
     
     # If the first number appears 2 or 3 times, the other must appear 3 or 2 times
     if count == 2 or count == 3:
-        return "Full House!"
+        return 25
     else:
-        return "Not a full house"
+        return check_four_a_kind(roll)
 def score_small_straight(roll):
     """Checks for 4 consecutive numbers. Returns 30 if valid, else 0."""
     # Convert to a sorted list of unique values
